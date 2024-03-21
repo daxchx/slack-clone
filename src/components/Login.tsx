@@ -1,12 +1,13 @@
 import React from 'react'
-import { signInWithGoogle } from '../features/auth/Auth'
+import { getUser } from '../features/user/userAPI'
 
 const Login = () => {
-  const loginWithGoogle = async () => {
+  const getUserInfo = async () => {
     try {
-      const result = await signInWithGoogle()
-      const login_user = result.user
-      console.log(login_user)
+      const user = await getUser('user document ID')
+      if (user) {
+        console.log(user)
+      }
     } catch (error) {
       console.error('Login failed:', error)
     }
@@ -20,7 +21,7 @@ const Login = () => {
             <h1 className="text-3xl text-center text-gray-700 mt-4">Slackにログイン</h1>
           </div>
           <div className="flex items-center justify-center">
-            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={loginWithGoogle}>
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={getUserInfo}>
               ログイン
             </button>
           </div>
