@@ -1,16 +1,11 @@
-import React from 'react'
-import { getUser } from '../features/user/userAPI'
+import { useAppDispatch } from '../app/hooks'
+import { login } from '../features/user/userSlice'
 
 const Login = () => {
-  const getUserInfo = async () => {
-    try {
-      const user = await getUser('user document ID')
-      if (user) {
-        console.log(user)
-      }
-    } catch (error) {
-      console.error('Login failed:', error)
-    }
+  const dispatch = useAppDispatch()
+
+  const setUserId = () => {
+    dispatch(login('User Docs ID'))
   }
 
   return (
@@ -21,7 +16,7 @@ const Login = () => {
             <h1 className="text-3xl text-center text-gray-700 mt-4">Slackにログイン</h1>
           </div>
           <div className="flex items-center justify-center">
-            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={getUserInfo}>
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={setUserId}>
               ログイン
             </button>
           </div>
